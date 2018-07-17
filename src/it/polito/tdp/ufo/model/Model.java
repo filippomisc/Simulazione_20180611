@@ -64,17 +64,23 @@ public class Model {
 		Graphs.addAllVertices(graph, stati);
 		
 		
-		for (String state1 : graph.vertexSet()) {
-			for (String state2 : graph.vertexSet()) {
-				if(!state1.equals(state2)){ // -------> fatto nella query seguente
-					
-//					boolean esisteArco = dao.esisteArco(anno, state1, state2);
-					
-					if(dao.esisteArco(anno, state1, state2));
-						graph.addEdge(state1, state2);
-				}
+//		for (String state1 : graph.vertexSet()) {
+//			for (String state2 : graph.vertexSet()) {
+//				if(!state1.equals(state2)){ // -------> fatto nella query seguente
+//					
+////					boolean esisteArco = dao.esisteArco(anno, state1, state2);
+//					
+//					if(dao.esisteArco(anno, state1, state2));
+//						graph.addEdge(state1, state2);
+//				}
+//			}
+//		}
+		
+		
+		List<StringPair>archi = dao.getEdges(anno) ;
+		for(StringPair sp : archi) {
+			graph.addEdge(sp.getStr1(), sp.getStr2()) ;
 			}
-		}
 		System.out.println("vertici: " + graph.vertexSet().size() + " archi: " + graph.edgeSet().size());
 	}
 
@@ -99,6 +105,7 @@ public class Model {
 			raggiungibili.add(bfv.next());
 		}
 		
+		raggiungibili.remove(stato);//rimuoviamo dalla lista il vertice da analizzare (primo della lista)
 		return raggiungibili;
 	}
 //	public List<String> getVertex() {
