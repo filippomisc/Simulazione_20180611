@@ -61,7 +61,7 @@ public class Neighbor {
 
 	@Override
 	public String toString() {
-		return "Neighbor [state1=" + state1 + ", state2=" + state2 + "]";
+		return state1 + "  " + state2;
 	}
 	
 	
