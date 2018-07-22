@@ -1,5 +1,8 @@
 package it.polito.tdp.ufo.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class State {
 	
 	private String id;
@@ -10,6 +13,10 @@ public class State {
 	private int area;
 	private int population;
 	private String neighbors;
+	
+	private List<Sighting> sightings;
+	
+	private List<State> vicini;
 	
 	
 	
@@ -24,6 +31,9 @@ public class State {
 		this.area = area;
 		this.population = population;
 		this.neighbors = neighbors;
+		
+		this.sightings = new ArrayList<Sighting>();
+		this.vicini = new ArrayList<State>();
 	}
 
 
@@ -112,6 +122,40 @@ public class State {
 	public String toString() {
 		return id + " name: " + name;
 	}
+
+
+
+
+
+
+
+	public List<State> getVicini() {
+		return vicini;
+	}
+
+
+
+	public void setVicini(List<State> vicini) {
+		this.vicini = vicini;
+	}
+
+
+
+	public List<Sighting> getSightings() {
+		return sightings;
+	}
+
+
+
+	public void setSightings(List<Sighting> sightings) {
+		this.sightings = sightings;
+	}
+
+
+
+
+
+
 
 
 
