@@ -120,9 +120,12 @@ public class State {
 
 	@Override
 	public String toString() {
-		return id + " name: " + name;
+		return "State [id=" + id + ", name=" + name + ", capital=" + capital + ", lat=" + lat + ", lng=" + lng
+				+ ", area=" + area + ", population=" + population + ", neighbors=" + neighbors + ", sightings="
+				+ sightings + ", vicini=" + vicini + "]";
 	}
 
+	
 
 
 
@@ -153,17 +156,6 @@ public class State {
 
 
 
-
-
-
-
-
-
-//	@Override
-//	public String toString() {
-//		return "State [id=" + id + ", name=" + name + ", capital=" + capital + ", lat=" + lat + ", lng=" + lng
-//				+ ", area=" + area + ", population=" + population + ", neighbors=" + neighbors + "]";
-//	}
 	
 	
 	

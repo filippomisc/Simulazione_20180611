@@ -132,8 +132,9 @@ public class Sighting {
 
 	@Override
 	public String toString() {
-		return String.format("Sighting [datetime=%s, city=%s, state=%s, country=%s, shape=%s, duration=%s]", datetime,
-				city, state.getId(), country, shape, duration);
+		return "Sighting [id=" + id + "]";
 	}
+	
+	
 
 }
