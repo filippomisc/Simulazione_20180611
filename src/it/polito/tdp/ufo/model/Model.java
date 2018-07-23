@@ -49,6 +49,9 @@ public class Model {
 		System.out.println(neighbors.size());
 		
 		
+		//per cercare lo stato con l'id MAIUSCOLO
+		String daTrasf = "ca";
+		System.out.println(stateIdMap.get(daTrasf.toUpperCase()).toString());
 }
 	
 	

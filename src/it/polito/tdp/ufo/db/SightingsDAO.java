@@ -15,7 +15,7 @@ import it.polito.tdp.ufo.model.Sighting;
 import it.polito.tdp.ufo.model.SightingIdMap;
 import it.polito.tdp.ufo.model.State;
 import it.polito.tdp.ufo.model.StateIdMap;
-import it.polito.tdp.ufo.model.StringPair;
+import it.polito.tdp.ufo.model.StatePair;
 
 public class SightingsDAO {
 	
@@ -195,7 +195,7 @@ public class SightingsDAO {
 			}
 }
 	
-public boolean esisteArco (Year anno, String s1, String s2){
+public boolean esisteArco (Year anno, State s1, State s2, StateIdMap stateIdMap){
 		
 		String sql = "select distinct count(*) as c " + 
 				"from sighting s1, sighting s2 " + 
@@ -211,8 +211,8 @@ public boolean esisteArco (Year anno, String s1, String s2){
 			Connection conn = DBConnect.getConnection() ;
 
 			PreparedStatement st = conn.prepareStatement(sql) ;
-			st.setString(1, s1);
-			st.setString(2, s2);
+			st.setString(1, stateIdMap.get(s1).getId());
+			st.setString(2, stateIdMap.get(s2).getId());
 			st.setInt(3, anno.getValue());
 					
 			ResultSet res = st.executeQuery();
@@ -245,8 +245,8 @@ public boolean esisteArco (Year anno, String s1, String s2){
 
 
 
-public List<StringPair> getEdges(Year anno) {
-	String sql = "select s1.* as state1 , s2.state as state2, count(*) as cnt" + 
+public List<StatePair> getEdges(Year anno, StateIdMap stateIdMap) {
+	String sql = "select s1.state as state1 , s2.state as state2, count(*) as cnt" + 
 			"from sighting s1, sighting s2 " + 
 			"where year(s1.datetime)=year(s2.datetime) " + 
 			"and year(s1.datetime)=? " + 
@@ -264,9 +264,15 @@ public List<StringPair> getEdges(Year anno) {
 		
 		ResultSet res = st.executeQuery() ;
 		
-		List<StringPair>list = new ArrayList<>() ;
+		List<StatePair> list = new ArrayList<>() ;
+		
 		while(res.next()) {
-			list.add(new StringPair(res.getString("state1"), res.getString("state2"), res.getInt("cnt"))) ;
+			
+			State s1 = stateIdMap.get(res.getString("state1"));
+			State s2 = stateIdMap.get(res.getString("state2"));
+			
+			list.add(new StatePair(s1, s2, res.getInt("cnt")));
+			
 		}
 		conn.close();
 		return list ;
